@@ -1,6 +1,8 @@
+from selenium.webdriver.common.by import By
+
 def ElementShouldNotBeVisible(driver, xpath):
     try:
-        validation = driver.find_element_by_xpath(xpath)
+        driver.find_element_by_xpath(xpath)
     except:
         validationResult = "ElementNotFound"
     else:
@@ -8,6 +10,14 @@ def ElementShouldNotBeVisible(driver, xpath):
 
 def ElementShouldBeVisible(driver, xpath):
     try:
-        validation = driver.find_element_by_xpath(xpath)
+        driver.find_element_by_xpath(xpath)
     except:
         raise Exception("Element Is Not Visible")
+
+
+def isElementPresent(driverParam, locator) -> bool:
+   try:
+       driverParam.find_element(By.XPATH, locator)
+       return True
+   except:
+       return False
