@@ -11,8 +11,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2 class="text-capitalize">Unittest Results</h2>
-                <p class='attribute'><strong>Start Time: </strong>2021-02-24 11:36:36</p>
-                <p class='attribute'><strong>Duration: </strong>22.85 s</p>
+                <p class='attribute'><strong>Start Time: </strong>2021-03-12 12:27:51</p>
+                <p class='attribute'><strong>Duration: </strong>0 ms</p>
                 <p class='attribute'><strong>Summary: </strong>Total: 1, Pass: 0, Error: 1</p>
             </div>
         </div>
@@ -21,14 +21,14 @@
                 <table class='table table-hover table-responsive'>
                     <thead>
                         <tr>
-                            <th>__main__.TestCases</th>
+                            <th>tearDownClass (__main__</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class='warning'>
-                            <td class="col-xs-10">test_DeliveryOrder</td>
+                            <td class="col-xs-10">TestCases)</td>
                             <td class="col-xs-1">
                                 <span class="label label-warning" style="display:block;width:40px;">Error</span>
                             </td>
@@ -37,31 +37,16 @@
                             </td>
                         </tr>
                         <tr style="display:none;">
-                            <td class="col-xs-9" colspan="3"><p>0
-</p><p style="color:maroon;">InvalidSelectorException: Message: invalid selector: Unable to locate an element with the xpath expression "//div[@class='roduct-card-add-line visible-lg-block '//div[@style='isplay: none;'" because of the following error:
-TypeError: Failed to execute 'evaluate' on 'Document': The result is not a node set, and therefore cannot be converted to the desired type.
-  (Session info: chrome=88.0.4324.150)
-</p><p style="color:maroon;">Traceback (most recent call last):
-  File "C:/Users/varda/Documents/Local-Express/Local Express/Main/Prerequisites/TestCases/DeliveryOrder/DeliveryOrder.py", line 32, in test_DeliveryOrder
-    AddProduct.addAnyProduct(self.driver, "\"//div[@class='roduct-card-add-line visible-lg-block '//div[@style='isplay: none;'\"")
-  File "C:\Users\varda\Documents\Local-Express\Local Express\Main\Prerequisites\LocalExpressClasses\Class_Global\AddProduct.py", line 8, in addAnyProduct
-    driverParam.find_element(By.XPATH, locator).click()
-  File "C:\Users\varda\AppData\Local\Programs\Python\Python38\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 976, in find_element
-    return self.execute(Command.FIND_ELEMENT, {
-  File "C:\Users\varda\AppData\Local\Programs\Python\Python38\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
-    self.error_handler.check_response(response)
-  File "C:\Users\varda\AppData\Local\Programs\Python\Python38\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: Unable to locate an element with the xpath expression "//div[@class='roduct-card-add-line visible-lg-block '//div[@style='isplay: none;'" because of the following error:
-TypeError: Failed to execute 'evaluate' on 'Document': The result is not a node set, and therefore cannot be converted to the desired type.
-  (Session info: chrome=88.0.4324.150)
-
+                            <td class="col-xs-9" colspan="3"><p style="color:maroon;">TypeError: tearDown() takes 1 positional argument but 2 were given</p><p style="color:maroon;">Traceback (most recent call last):
+  File "C:/Users/varda/Documents/Local-Express/Local Express/Main/Prerequisites/TestCases/DeliveryOrder/DeliveryOrder.py", line 31, in tearDownClass
+    cls.globalLocalExpress.tearDown(cls.driver)
+TypeError: tearDown() takes 1 positional argument but 2 were given
 </p>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3">
-                                Total: 1, Pass: 0, Error: 1 -- Duration: 22.85 s
+                                Total: 1, Pass: 0, Error: 1 -- Duration: 0 ms
                             </td>
                         </tr>
                     </tbody>

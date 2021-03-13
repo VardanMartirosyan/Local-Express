@@ -3,6 +3,7 @@ import unittest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from Main.Prerequisites.LocalExpressClasses.Class_Global.SetUpConfiguration import *
 from Main.Prerequisites.LocalExpressClasses.Class_Global.AddProduct import *
 from Main.Prerequisites.LocalExpressClasses.Class_Global.Class_GlobalLocalExpress import *
 from Main.Prerequisites.LocalExpressClasses.Header.Class_NavigationBar.Cart import *
@@ -14,27 +15,33 @@ from Main.Prerequisites.LocalExpressClasses.Store.Class_OpenMarketplaceStore.Ope
 
 
 class TCStart(unittest.TestCase):
+    globalLocalExpress = None
+    
     @classmethod
     def setUpClass(cls):
-        cls.driver = GlobalLocalExpress.openGCAndCustomizeiBrowserSettings()
+        cls.driver = SetUpConfiguration.openGCAndCustomizeiBrowserSettings()
+        cls.addProduct = AddProduct(cls.driver)
+        cls.page_MarketplaceStores = Page_MarketplaceStores(cls.driver)
+        cls.globalLocalExpress = GlobalLocalExpress(cls.driver)
+        cls.openMarketplaceStore = OpenMarketplaceStore(cls.driver)
+        cls.cart = Cart(cls.driver)
 
     @classmethod
     def tearDownClass(cls):
-        GlobalLocalExpress.tearDown(cls.driver)
+        cls.globalLocalExpress.tearDown(cls.driver)
         print("Message")
 
 class TestCases(TCStart):
 
     def test_DeliveryOrder(self):
-        Page_MarketplaceStores.openLocalExpressStoresSection(self.driver)
-        GlobalLocalExpress.setLALocation(self.driver)
-        GlobalLocalExpress.fastSignIn(self.driver, Env.WebTestingLogIn, Env.WebTestingPassword)
-        OpenMarketplaceStore.openStoreFromSearch(self.driver, "Local Express WebTesting")
-        Cart.openCart(self.driver)
-        Cart.removeCartAllContent(self.driver)
-        AddProduct.addProduct(self.driver, "//div[@class='product-card-cart-wrapper']//span[@role='button-text']")
-        AddProduct.addProduct(self.driver, "//div[@class='product-card-cart-wrapper']//span[@role='button-text']")
-        Cart.closeCart(self.driver)
+        self.page_MarketplaceStores.openLocalExpressStoresSection()
+        self.globalLocalExpress.setLALocation()
+        self.globalLocalExpress.fastSignIn(Env.WebTestingLogIn, Env.WebTestingPassword)
+        self.openMarketplaceStore.openStoreFromSearch("Local Express WebTesting")
+        self.cart.openCart()
+        self.cart.removeCartAllContent()
+        self.addProduct.addAnyProduct("//div[@class='product-card-cart-wrapper']//span[@role='button-text']")
+        self.cart.closeCart()
         print("Any Message")
 
 if __name__ == '__main__':

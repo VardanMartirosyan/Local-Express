@@ -3,27 +3,25 @@ from selenium.webdriver.common.by import By
 
 
 class UserMenuMobile:
-    @staticmethod
-    def openUserMenuMobileDropdown(driverParam):
-        UserMenuMobile.userMenuMobileDropdownShouldBeClosedValidation(driverParam)
-        UserMenuMobile.clickInUserMenuMobileDropdown(driverParam)
-        UserMenuMobile.userMenuMobileDropdownContentValidation(driverParam)
+    def __init__(self, driver):
+        self.driverParam = driver
 
-    @staticmethod
-    def clickSignInDropdownMenuButton(driverParam):
-        driverParam.find_element(By.XPATH, "//a[contains(text(),'Sign In')]").click()
+    def openUserMenuMobileDropdown(self):
+        self.userMenuMobileDropdownShouldBeClosedValidation()
+        self.clickInUserMenuMobileDropdown()
+        self.userMenuMobileDropdownContentValidation()
 
-    @staticmethod
-    def userMenuMobileDropdownShouldBeClosedValidation(driverParam):
-        ElementShouldNotBeVisible(driverParam, "//*[@class='open']")
+    def clickSignInDropdownMenuButton(self):
+        self.driverParam.find_element(By.XPATH, "//a[contains(text(),'Sign In')]").click()
 
-    @staticmethod
-    def clickInUserMenuMobileDropdown(driverParam):
-        driverParam.find_element(By.XPATH, "//*[@id='user-menu-mobile']/i").click()
+    def userMenuMobileDropdownShouldBeClosedValidation(self):
+        ElementShouldNotBeVisible(self.driverParam, "//*[@class='open']")
 
-    @staticmethod
-    def userMenuMobileDropdownContentValidation(driverParam):
-        driverParam.find_element(By.XPATH, "//*[@class='open']")
-        driverParam.find_element(By.XPATH, "//*[@class='open']/ul/li[1]")
-        driverParam.find_element(By.XPATH, "//*[@class='open']/ul/li[2]")
-        driverParam.find_element(By.XPATH, "//*[@class='open']/ul/li[3]")
+    def clickInUserMenuMobileDropdown(self):
+        self.driverParam.find_element(By.XPATH, "//*[@id='user-menu-mobile']/i").click()
+
+    def userMenuMobileDropdownContentValidation(self):
+        self.driverParam.find_element(By.XPATH, "//*[@class='open']")
+        self.driverParam.find_element(By.XPATH, "//*[@class='open']/ul/li[1]")
+        self.driverParam.find_element(By.XPATH, "//*[@class='open']/ul/li[2]")
+        self.driverParam.find_element(By.XPATH, "//*[@class='open']/ul/li[3]")

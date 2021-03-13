@@ -5,28 +5,26 @@ from Main.Prerequisites.LocalExpressClasses.Header.Class_StoresSection.HeaderMen
 
 
 class PopUp_SignInMarketplace:
-    @staticmethod
-    def SignInPopUpValidation(driverParam):
+    def __init__(self, driver):
+        self.driverParam = driver
+        self.headerMenu = HeaderMenu(self.driverParam)
+
+    def SignInPopUpValidation(self):
         #Todo
         print(" ")
 
-    @staticmethod
-    def fillDataAndPressSignIn(driverParam, logIn, password):
-        PopUp_SignInMarketplace.fillEmail(driverParam, logIn)
-        PopUp_SignInMarketplace.fillPassword(driverParam, password)
-        PopUp_SignInMarketplace.clickSignInButton(driverParam)
-        HeaderMenu.isSignInValidation(driverParam)
+    def fillDataAndPressSignIn(self, logIn, password):
+        self.fillEmail(logIn)
+        self.fillPassword(password)
+        self.clickSignInButton()
+        self.headerMenu.isSignInValidation()
 
+    def fillEmail(self, email):
+        self.driverParam.find_element(By.XPATH, "//input[@name='credentials[email]']").send_keys(email)
 
-    @staticmethod
-    def fillEmail(driverParam, email):
-        driverParam.find_element(By.XPATH, "//input[@name='credentials[email]']").send_keys(email)
+    def fillPassword(self, password):
+        self.driverParam.find_element(By.XPATH, "//input[@name='credentials[password]']").send_keys(password)
 
-    @staticmethod
-    def fillPassword(driverParam, password):
-        driverParam.find_element(By.XPATH, "//input[@name='credentials[password]']").send_keys(password)
-
-    @staticmethod
-    def clickSignInButton(driverParam):
-        driverParam.find_element(By.XPATH, "//button[contains(text(),'Sign In')]").click()
+    def clickSignInButton(self):
+        self.driverParam.find_element(By.XPATH, "//button[contains(text(),'Sign In')]").click()
 

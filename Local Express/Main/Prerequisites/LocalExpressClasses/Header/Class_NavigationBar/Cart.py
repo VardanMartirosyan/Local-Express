@@ -6,46 +6,42 @@ from Main.Prerequisites.LocalExpressClasses.Header.Class_NavigationBar.CartValid
 
 
 class Cart():
-    @staticmethod
-    def openCart(driverParam):
-        if isElementPresent(driverParam, "(//a[@class='cart-btn active'])[1]"):
-            return
-        CartValidation.cartButtonShouldBeExist(driverParam)
-        driverParam.find_element(By.XPATH, "(//a[@class='cart-btn'])[1]").click()
-        CartValidation.cartShouldBeOpened(driverParam)
+    def __init__(self, driver):
+        self.driverParam = driver
+        self.cartValidation = CartValidation(self.driverParam)
 
-    @staticmethod
-    def closeCart(driverParam):
-        if isElementPresent(driverParam, "(//a[@class='cart-btn'])[1]"):
+    def openCart(self):
+        if isElementPresent(self.driverParam, "(//a[@class='cart-btn active'])[1]"):
             return
-        CartValidation.cartShouldBeOpened(driverParam)
-        driverParam.find_element(By.XPATH, "//*[@title='products-cart']//a[@role='cart-close']").click()
-        CartValidation.cartShouldBeClosed(driverParam)
+        self.cartValidation.cartButtonShouldBeExist()
+        self.driverParam.find_element(By.XPATH, "(//a[@class='cart-btn'])[1]").click()
+        self.cartValidation.cartShouldBeOpened()
 
-    @staticmethod
-    def removeCartAllContent(driverparam):
-        cardProductsCount = Cart.getCartValue(driverparam)
+    def closeCart(self):
+        if isElementPresent(self.driverParam, "(//a[@class='cart-btn'])[1]"):
+            return
+        self.cartValidation.cartShouldBeOpened()
+        self.driverParam.find_element(By.XPATH, "//*[@title='products-cart']//a[@role='cart-close']").click()
+        self.cartValidation.cartShouldBeClosed()
+
+    def removeCartAllContent(self):
+        cardProductsCount = self.cartValidation.getCartValue()
         if cardProductsCount == 0:
             return
-        Cart.openCart(driverparam)
+        self.openCart()
         for x in range(cardProductsCount):
-            Cart.removeFirstItemFromCart(driverparam)
-        Cart.cartShouldBeEmpty(driverparam)
+            self.removeFirstItemFromCart()
+        self.cartValidation.cartShouldBeEmpty()
 
-    @staticmethod
-    def removeFirstItemFromCart(driverParam):
-        CartValidation.cartShouldBeOpened(driverParam)
-        cardProductsCount = Cart.getCartValue(driverParam)
-        driverParam.find_element(By.XPATH, "//*[@role='cart-remove-all-product']").click()
+    def removeFirstItemFromCart(self):
+        self.cartValidation.cartShouldBeOpened()
+        cardProductsCount = self.cartValidation.getCartValue()
+        self.driverParam.find_element(By.XPATH, "//*[@role='cart-remove-all-product']").click()
         time.sleep(2)
-        cardProductsCountAfterAdd = Cart.getCartValue(driverParam)
+        cardProductsCountAfterAdd = self.cartValidation.getCartValue()
         if int(cardProductsCount) - 1 != int(cardProductsCountAfterAdd):
             print("Can not Delete product from Cart.")
             exit(3)
 
-
-    @staticmethod
-    def getCartValue(driverParam) -> int:
-        return int(driverParam.find_element(By.XPATH, "(//span[@class='product-cart-qty'])[1]").text)
 
 

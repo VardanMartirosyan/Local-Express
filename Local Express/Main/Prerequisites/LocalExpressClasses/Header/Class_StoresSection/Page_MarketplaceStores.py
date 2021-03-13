@@ -3,16 +3,16 @@ from selenium.webdriver.common.by import By
 
 
 class Page_MarketplaceStores:
-    @staticmethod
-    def openLocalExpressStoresSection(driverParam):
-        driverParam.get("https://local.express/stores")
-        Page_MarketplaceStores.LocalExpressMarketplaceStoreValidation(driverParam)
+    def __init__(self, driver):
+        self.driverParam = driver
 
-    @staticmethod
-    def LocalExpressMarketplaceStoreValidation(driverParam):
-        Page_MarketplaceStores.validationByPageTitle(driverParam)
-        driverParam.find_element(By.NAME, "search-store")
+    def openLocalExpressStoresSection(self):
+        self.driverParam.get("https://local.express/stores")
+        self.LocalExpressMarketplaceStoreValidation()
 
-    @staticmethod
-    def validationByPageTitle(driverParam):
-        assert "Find a store" in driverParam.title
+    def LocalExpressMarketplaceStoreValidation(self):
+        self.validationByPageTitle()
+        self.driverParam.find_element(By.NAME, "search-store")
+
+    def validationByPageTitle(self):
+        assert "Find a store" in self.driverParam.title
