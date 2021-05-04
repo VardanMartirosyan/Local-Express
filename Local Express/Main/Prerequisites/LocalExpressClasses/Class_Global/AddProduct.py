@@ -1,9 +1,10 @@
 import string
 import time
-
 from selenium.webdriver.common.by import By
 
-class AddProduct():
+from TestData.ENVs import Env
+
+class AddProduct:
     def __init__(self, driver):
         self.driverParam = driver
 
@@ -14,6 +15,7 @@ class AddProduct():
         cardProductsCountAfterAdd = self.getCartValue()
         if int(cardProductsCount) + 1 != int(cardProductsCountAfterAdd):
             print("Can not add product to cart.")
+            self.driverParam.save_screenshot(Env.screenshotFilePath + "2.png")
             exit(2)
 
     def getCartValue(self) -> int:

@@ -1,0 +1,16 @@
+
+Running tests... 
+----------------------------------------------------------------------
+ test_DeliveryOrder (Main.Prerequisites.TestCases.DeliveryOrder.DeliveryOrder.DeleveryOrder) ... OK (73.195901)s
+ test_LogInMarketplace (Main.Prerequisites.TestCases.SignIn.LogInMarketplace.LogInMarketplace) ... OK (77.849348)s
+
+----------------------------------------------------------------------
+Ran 2 tests in 0:02:49
+
+OK
+
+
+
+Generating HTML reports... 
+reports\TestResults_Main.Prerequisites.TestCases.DeliveryOrder.DeliveryOrder.DeleveryOrder_2021-04-06_14-50-25.html
+reports\TestResults_Main.Prerequisites.TestCases.SignIn.LogInMarketplace.LogInMarketplace_2021-04-06_14-50-25.html

@@ -10,22 +10,20 @@ class GlobalLocalExpress:
     def __init__(self, driver):
         self.driverParam = driver
         self.popUp_SignInMarketplace = PopUp_SignInMarketplace(self.driverParam)
-        self.headerMenu = HeaderMenu(self.driverParam)
 
     def fastSignIn(self, email, password):
+        self.driverParam.implicitly_wait(20)
+        time.sleep(2)
         self.driverParam.find_element(By.XPATH, "//*[@id='user-menu-mobile']/i").click()
         self.driverParam.find_element(By.XPATH, "//a[contains(text(),'Sign In')]").click()
         self.popUp_SignInMarketplace.fillEmail(email)
         self.popUp_SignInMarketplace.fillPassword(password)
         self.popUp_SignInMarketplace.clickSignInButton()
-        self.headerMenu.isSignInValidation()
-
-    def fastSignUp(self):
-        self.driverParam.find_element(By.XPATH, "//*[@id='header-user-menu']/div").click()
-        self.driverParam.find_element(By.LINK_TEXT, "Sign Out").click()
+        self.popUp_SignInMarketplace.headerMenu.isSignInValidation()
+        self.driverParam.implicitly_wait(10)
 
     def tearDown(self):
-        if self.driverParam.find_element(By.XPATH, "//*[@id='header-user-menu']/div"):
+        if isElementPresent(self.driverParam, "//*[@id='header-user-menu']/div"):
             #TODO
             #i can not call funtion here
             #Cart.closeCart(driverParam)
@@ -34,7 +32,7 @@ class GlobalLocalExpress:
             #TODO
             #fastSignUp(driverParam)
             self.driverParam.close()
-        elif driverParam.find_element(By.XPATH, "//*[@id='user-menu-mobile']"):
+        elif isElementPresent(self.driverParam, "//*[@id='user-menu-mobile']"):
             print("Any Message")
             self.driverParam.close()
 
@@ -42,9 +40,10 @@ class GlobalLocalExpress:
         #driverParam.find_element(By.NAME, "filter[address]").clear().send_keys("455 n louise St, Glandle, CA" + Keys.ENTER)
         self.driverParam.implicitly_wait(20)
         locationField = self.driverParam.find_element(By.NAME, "filter[address]")
+        time.sleep(2)
         locationField.clear()
         locationField.send_keys("455 N Louise St, Glendale, CA")
-        time.sleep(7)
+        time.sleep(5)
         self.driverParam.find_element(By.XPATH, "//span[contains(text(),'455 N Louise St, Glendale, CA 91206, USA')]").click()
         self.driverParam.implicitly_wait(10)
 

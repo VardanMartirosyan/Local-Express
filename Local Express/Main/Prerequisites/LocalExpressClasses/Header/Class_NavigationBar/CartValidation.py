@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from Automation.FunctionalityLib import *
 from Main.Prerequisites.LocalExpressClasses.Header.Class_NavigationBar.Cart import *
+from TestData.ENVs import Env
 
 
 class CartValidation():
@@ -23,6 +24,7 @@ class CartValidation():
             pass
         else:
             print("Cart is empty")
+            self.driverParam.save_screenshot(Env.screenshotFilePath + "4.png")
             exit(4)
 
     def cartShouldBeEmpty(self):
@@ -31,6 +33,7 @@ class CartValidation():
             pass
         else:
             print("Cart is not empty")
+            self.driverParam.save_screenshot(Env.screenshotFilePath + "5.png")
             exit(5)
 
     def getCartValue(self) -> int:

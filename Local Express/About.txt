@@ -1,0 +1,32 @@
+In this Project Used:
+    Selenium Basic commands:
+        Find elements from:
+            Xpath:
+                Real
+                Absolut
+            Css Selector
+            Tag Name
+            Link_Text
+            Class Name
+            Id
+            Text
+        Click,
+        Search,
+        Fill field,
+        Assert,
+        Send keys and texts from keyboard
+        Used keyboard hotkeys
+        Elements validations
+    Design Pattern - POM
+    Listener
+    Logger
+    Reports Generator
+    Run multiple TCs
+    Read/Write from/to file
+    Static Functions
+    Exception handling
+    TearDown and SetUp methods
+    Classes Inheritance
+    Functions Overwriting
+    Custom Functions For TCs
+

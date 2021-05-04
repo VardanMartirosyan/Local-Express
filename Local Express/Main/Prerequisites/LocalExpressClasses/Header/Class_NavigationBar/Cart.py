@@ -1,11 +1,9 @@
-from selenium.webdriver.common.by import By
 import time
-
 from Automation.FunctionalityLib import *
 from Main.Prerequisites.LocalExpressClasses.Header.Class_NavigationBar.CartValidation import *
 
 
-class Cart():
+class Cart:
     def __init__(self, driver):
         self.driverParam = driver
         self.cartValidation = CartValidation(self.driverParam)
@@ -41,6 +39,7 @@ class Cart():
         cardProductsCountAfterAdd = self.cartValidation.getCartValue()
         if int(cardProductsCount) - 1 != int(cardProductsCountAfterAdd):
             print("Can not Delete product from Cart.")
+            self.driverParam.save_screenshot(Env.screenshotFilePath + "3.png")
             exit(3)
 
 

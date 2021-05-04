@@ -5,6 +5,20 @@ class HeaderMenu:
     def __init__(self, driver):
         self.driverParam = driver
 
+    def isSignedIn(self) -> bool:
+        try:
+            self.driverParam.find_element(By.XPATH, "//*[@id='header-user-menu']/div")
+            return True
+        except:
+            return False
+
+    def isNotSignedIn(self) -> bool:
+        try:
+            self.driverParam.find_element(By.XPATH, "//*[@id='header-user-menu']/div")
+            return False
+        except:
+            return True
+
     def isSignInValidation(self):
         self.driverParam.find_element(By.XPATH, "//*[@id='header-user-menu']/div")
 

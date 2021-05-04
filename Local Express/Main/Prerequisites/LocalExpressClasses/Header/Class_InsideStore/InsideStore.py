@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from Main.Prerequisites.LocalExpressClasses.Header.Class_InsideStore import InsideStoreValidation
+from TestData.ENVs import Env
 
 
 class InsideStore():
@@ -16,6 +17,7 @@ class InsideStore():
                 self.driverParam.find_element(By.XPATH, departmentNameXpath)
             except:
                 print("Department not found")
+                self.driverParam.save_screenshot(Env.screenshotFilePath + "1.png")
                 exit(1)
 
     def addProductFromSlider(self):

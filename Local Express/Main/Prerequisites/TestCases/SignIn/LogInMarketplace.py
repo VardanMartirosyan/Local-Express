@@ -1,12 +1,14 @@
-import HtmlTestRunner
 import unittest
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
+import Automation.MyLogger as myLogger
+
+from Automation.MyListener import MyListener
 from Main.Prerequisites.LocalExpressClasses.Class_Global.SetUpConfiguration import *
 from Main.Prerequisites.LocalExpressClasses.Class_Global.Class_GlobalLocalExpress import *
 from Main.Prerequisites.LocalExpressClasses.Header.Class_StoresSection.Page_MarketplaceStores import *
 from Main.Prerequisites.LocalExpressClasses.Header.Class_StoresSection.PopUp_SignInMarketPlace import *
 from Main.Prerequisites.LocalExpressClasses.Header.Class_NavigationBar.UserMenuMobile import *
+from selenium.webdriver.support.events import EventFiringWebDriver
+from TestData.ENVs import Env
 
 class TCStart(unittest.TestCase):
     globalLocalExpress = None
@@ -14,18 +16,19 @@ class TCStart(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.driver = SetUpConfiguration.openGCAndCustomizeiBrowserSettings()
-        cls.globalLocalExpress = GlobalLocalExpress(cls.driver)
-        cls.page_MarketplaceStores = Page_MarketplaceStores(cls.driver)
-        cls.userMenuMobile = UserMenuMobile(cls.driver)
-        cls.popUp_SignInMarketplace = PopUp_SignInMarketplace(cls.driver)
+        cls.edriver = EventFiringWebDriver(cls.driver, MyListener())
+        cls.globalLocalExpress = GlobalLocalExpress(cls.edriver)
+        cls.page_MarketplaceStores = Page_MarketplaceStores(cls.edriver)
+        cls.userMenuMobile = UserMenuMobile(cls.edriver)
+        cls.popUp_SignInMarketplace = PopUp_SignInMarketplace(cls.edriver)
+        cls.headerMenu = HeaderMenu(cls.edriver)
 
     @classmethod
     def tearDownClass(cls):
-        cls.globalLocalExpress.tearDown(cls.driver)
-        print("Message")
+        cls.globalLocalExpress.tearDown()
 
 
-class TestCases(TCStart):
+class LogInMarketplace(TCStart):
 
     def test_LogInMarketplace(self):
         self.page_MarketplaceStores.openLocalExpressStoresSection()
@@ -33,8 +36,9 @@ class TestCases(TCStart):
         self.userMenuMobile.openUserMenuMobileDropdown()
         self.userMenuMobile.clickSignInDropdownMenuButton()
 
-        self.popUp_SignInMarketplace.SignInPopUpValidation()
-        self.popUp_SignInMarketplace.fillDataAndPressSignIn(Env.WebTestingLogIn, Env.WebTestingPassword)
+        self.popUp_SignInMarketplace.signInPopUpValidation()
+        self.popUp_SignInMarketplace.signInDDT()
+        myLogger.logger("INFO", str(self.__class__.__name__) + Env.passTestCaseLoggerMessage, Env.logFilePath)
 
 
 

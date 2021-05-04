@@ -1,0 +1,6 @@
+06-04-2021 14:51:40 INFO DeleveryOrder: Goes PASS
+06-04-2021 14:51:45 INFO Current google-chrome version is 89.0.4389
+06-04-2021 14:51:45 INFO Get LATEST driver version for 89.0.4389
+06-04-2021 14:51:45 INFO Driver [C:\Users\varda\.wdm\drivers\chromedriver\win32\89.0.4389.23\chromedriver.exe] found in cache
+06-04-2021 14:53:04 INFO LogInMarketplace: Goes PASS
+30-04-2021 20:58:10 INFO DeleveryOrder: Goes PASS
